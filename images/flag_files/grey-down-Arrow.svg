@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="10px" viewBox="0 0 18 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>grey-down-Arrow</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Header-Footer" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.5">
+        <g id="SVG" transform="translate(-171.000000, -137.000000)" fill="#000000" fill-rule="nonzero">
+            <path d="M180,147 C179.723543,147.000362 179.458343,146.89098 179.263107,146.696068 L171.305212,138.77154 C170.898855,138.366165 170.899149,137.709599 171.305868,137.304585 C171.712587,136.899572 172.371918,136.899279 172.778999,137.303932 L180,144.494703 L187.221001,137.303932 C187.628082,136.899279 188.287413,136.899572 188.694132,137.304585 C189.100851,137.709599 189.101145,138.366165 188.694788,138.77154 L180.736893,146.696068 C180.541657,146.89098 180.276457,147.000362 180,147 L180,147 Z" id="grey-down-Arrow"></path>
+        </g>
+    </g>
+</svg>

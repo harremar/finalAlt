@@ -1,0 +1,169 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-undef */
+
+// THis file holds logic to show pop up as tooltip for cms paragraph component
+$(document).ready(function () {
+  _seeDetailsPopup();
+  _customModalRegisterHandlers();
+  _doNotSellPersonalInfoLinkHandler();
+  _clickableContainer();
+});
+
+function _seeDetailsPopup() {
+
+  $(document)
+    .off('click.seedetails')
+    .on('click.seedetails', '.hero-banner-see-details-link', function (event) {
+      event.preventDefault();
+      const type = $(event.target).attr('data-type');
+      const popupType = $(event.target).attr('data-popup');
+      const targetPopup = $(
+        `${'.hero-banner--see-details-popup' + '.'}${type}`
+      );
+      _showHideHeroBannerDetailsPopup(
+        true,
+        $(".hero-banner--see-details-popup")
+      );
+      _removePopupData();
+      if (popupType !== null && popupType !== '') {
+        $(`.${type}`).append($(`#${popupType}`).html());
+      }
+      if (targetPopup.css('display') == 'block') {
+        _showHideHeroBannerDetailsPopup(true, targetPopup);
+        _removePopupData();
+      } else {
+        _showHideHeroBannerDetailsPopup(false, targetPopup, $(event.target));
+      }
+    });
+  // $('#target-keurig-heroimage .hero-banner__wrapper').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+  //   _showHideHeroBannerDetailsPopup(true, $('#target-keurig-heroimage .hero-banner .hero-banner--see-details-popup'));
+  // });
+  $(document)
+    .off('click.trapdoor')
+    .on('click.trapdoor', '.trapdoor .close-see-detail-popup', function (
+      event
+    ) {
+      event.preventDefault();
+      const targetPopup = $(event.target).closest(
+        '.hero-banner--see-details-popup'
+      );
+      _showHideHeroBannerDetailsPopup(true, targetPopup);
+      _removePopupData();
+    });
+}
+function _removePopupData() {
+  if (
+    $('.hero-banner--see-details-popup').find('.popup-container').length > 0
+  ) {
+    $('.hero-banner--see-details-popup').find('.popup-container').remove();
+  }
+}
+function _showHideHeroBannerDetailsPopup(bool, popup, target) {
+  if (bool) {
+    popup.css('display', 'none');
+    return;
+  }
+  const targetLeftPos = target[0].offsetLeft;
+  const targetTopPos = target[0].offsetTop;
+  const popupWidth = parseInt(popup.css('width'));
+  let leftVal = targetLeftPos - popupWidth / 2 + 15;
+  const popupOuterWidth = popup.outerWidth();
+  const pointer = popup.find('.hb-detail-pointer-container');
+  if (leftVal < 0) {
+    pointer.css('left', `${popupWidth / 2 + leftVal}px`);
+    leftVal = 0;
+  } else if (
+    popupOuterWidth + leftVal >
+    $('#target-keurig-heroimage .slick-slide').width()
+  ) {
+    const rightEdge =
+      popupOuterWidth +
+      leftVal -
+      $('#target-keurig-heroimage .slick-slide').width();
+    leftVal -= rightEdge;
+    pointer.css('left', `${targetLeftPos - leftVal + 15}px`);
+  } else {
+    pointer.css('left', '50%');
+  }
+  popup.css('left', `${leftVal}px`);
+  popup.css('top', `${targetTopPos + target.height() + 10}px`);
+  // $( document ).find( '[widgettype=keurigHeroImageBannerWidget]' ).addClass( "overflowAuto" );
+  popup.css('display', 'block');
+  if ($('.play-pause-btn--play')[0]) {
+    $('.hero-banner__wrapper').slick('slickPause');
+  }
+}
+
+const _customModalRegisterHandlers = () => {
+  $(document)
+    .off('click.customModal')
+    .on('click.customModal', '.with-custom-modal .custom-modal-trigger', _customModalOpen);
+  $(document)
+    .off('click.customModalClose')
+    .on('click.customModalClose', '.with-custom-modal .custom-close-modal', _customModalClose);
+  $(document)
+    .off('click.customModalClickOutside')
+    .on('click.customModalClickOutside', '.with-custom-modal .custom-modal', _customModalClickOutside);
+}
+
+const _customModalOpen = function(e) {
+  const modalId = e.target.dataset.open;
+  const bodyElem = document.querySelector('body');
+  const headerElem = document.querySelector('.header-content');
+  const scrollBarWidth = window.innerWidth - document.body.clientWidth;
+  document.getElementById(modalId)?.classList.add('is-visible');
+  bodyElem.style.overflow = 'hidden';
+  bodyElem.style.paddingRight = `${scrollBarWidth}px`;
+  if(headerElem) {
+    headerElem.style.paddingRight = `${scrollBarWidth}px`;
+  }
+}
+const _customModalClose = function(e) {
+  e.stopPropagation();
+  const target = e.target;
+  const bodyElem = document.querySelector('body');
+  const headerElem = document.querySelector('.header-content');
+  target.closest('.custom-modal.is-visible')?.classList.remove('is-visible');
+  bodyElem.style.overflow = 'auto';
+  bodyElem.style.paddingRight = '';
+  if(headerElem) {
+    headerElem.style.paddingRight = '';
+  }
+}
+const _customModalClickOutside = function(e) {
+  if (e.target === document.querySelector(".custom-modal.is-visible")) {
+      const bodyElem = document.querySelector('body');
+      const headerElem = document.querySelector('.header-content');
+      document.querySelector(".custom-modal.is-visible")?.classList.remove('is-visible');
+      bodyElem.style.overflow = 'auto';
+      bodyElem.style.paddingRight = '';
+      if(headerElem) {
+        headerElem.style.paddingRight = '';
+      }
+  }
+}
+
+const _doNotSellPersonalInfoLinkHandler= () => {
+  $(document)
+  .off('click.doNotSell')
+  .on('click.doNotSell', '#FooterDoNotSellPersonalInfoLink', _showConsentPreferences);
+}
+
+const _showConsentPreferences = () => {
+  return utag?.gdpr?.showConsentPreferences();
+}
+
+const _clickableContainer = () => {
+  $(document)
+    .off('click.clickableContainer')
+    .on('click.clickableContainer', '.clickable-container', function (e) {
+      const { target } = e;
+      const url = $(this).data('clickable-url');
+      if($(target).hasClass('not-clickable') || $(target).parents('.not-clickable').length > 0) {
+        return;
+      }
+      if(url) {
+        window.location = url;
+      }
+    });
+}

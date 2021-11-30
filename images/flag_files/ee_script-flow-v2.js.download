@@ -1,0 +1,215 @@
+function eegetCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function eeTriggerProactiveChat(subjectMessage){
+  var div = document.createElement('div');
+  div.id = 'ee_initialmessage';
+  div.innerHTML = '<span class="oit-chat-bubble">'+ee_ProactiveText+'</span>';
+  div.className = 'oit-chat-bubble-container oit-chat-bubble-agent';
+  ee_innerDoc.getElementsByClassName('oj-flex')[0].before(div);
+
+ setTimeout(function(){ee_innerDoc.getElementsByClassName('oj-flex')[1].firstChild.style.visibility = "hidden";
+                  ee_innerDoc.getElementsByClassName('oj-flex')[1].firstChild.style.visibility = "hidden";
+                  ee_innerDoc.getElementsByClassName('oj-flex')[1].firstChild.style.display = "none";
+                  ee_innerDoc.getElementsByClassName('oj-flex')[2].style.visibility = "hidden";
+                  ee_innerDoc.getElementsByClassName('oj-flex')[2].style.display = "none";
+                  ee_innerDoc.getElementsByClassName('oj-flex')[3].style.visibility = "hidden";
+                  ee_innerDoc.getElementsByClassName('oj-flex')[3].style.display = "none";
+                  ee_innerDoc.getElementsByClassName('oj-flex')[4].style.visibility = "hidden";
+                  ee_innerDoc.getElementsByClassName('oj-flex')[4].style.display = "none";
+                  ee_innerDoc.getElementById('title-link').click();
+                },1000);
+}
+
+
+
+function eeSetCategoryID(categoryID){
+  ee_innerDoc.getElementById("inlay-oracle-chat-embedded").setAttribute("category-id",categoryID);
+}
+
+function eeProactiveText(proactiveText){
+  ee_ProactiveText = proactiveText;
+}
+
+function eesetVariable(newVariable, newValue){
+  this[newVariable] = newValue;
+}
+
+
+function eeloadJSON(path, success, error) {
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        success(JSON.parse(xhr.responseText));
+      }
+      else {
+        error(xhr);
+      }
+    }
+  };
+  xhr.open('GET', path, true);
+  xhr.send();
+}
+
+function eesetChannelService(Data)
+{
+  // Output only the details on the first post
+  console.log(Data);
+  ee_channelCachedContentServer = Data;
+}
+
+function eesetProactiveChat(Data)
+{
+  // Output only the details on the first post
+  console.log(Data);
+  ee_proactiveChatAvailable = Data;
+}
+
+function eecheckProactiveAvailability(categoryID){
+	eeloadJSON("https://urldefense.com/v3/__https://*22*ee_channelCachedContentServer.items*0*.channelCachedContentServer**A22/engagement/api/consumer/*22*ee_channelCachedContentServer.items*0*.tenantName**A22/v1/getEngagementQueue?request=*7B*22interfaceId*22*3A*22*22*ee_channelCachedContentServer.items*0*.interfaceId**A22*22*2C*22categoryId*22*3A*22*categoryID**A22*7D__;JStbXSslJStbXSslJSUlJSUlK1tdKyUlJSUlJSUrKyUl!!LrkQbg!cihNwaZ8VMpfwPRwCjMb0gGr7kuuoPE2xbOyMnrGZpffm9qy_M2vCZ9c2nDMWxwtbw$ ", eesetProactiveChat,'jsonp');
+	ee_proactiveChatCategoryID = categoryID;
+
+}
+
+function eeSetFirstNameFromJS(iterations){
+  if((typeof utag_data !== 'undefined') && (typeof utag_data.customer_first_name !== 'undefined') && ee_innerDoc.querySelectorAll("#launch-form-first-name").item(0)){
+    ee_innerDoc.querySelectorAll("#launch-form-first-name").item(0).value=utag_data.customer_first_name;
+    ee_NubmerOfCookies++;   
+  }
+  else{
+    iterations++;
+    if(iterations<15){
+      setTimeout(function(){eeSetFirstNameFromJS(iterations);},1000);
+    }
+  }
+}
+
+function eeSetLastNameFromJS(iterations){
+  console.log("eelog: " + iterations);
+  if((typeof utag_data !== 'undefined') && (typeof utag_data.customer_last_name !== 'undefined') && ee_innerDoc.querySelectorAll("#launch-form-last-name").item(0)){
+    ee_innerDoc.querySelectorAll("#launch-form-last-name").item(0).value=utag_data.customer_last_name;
+    ee_NubmerOfCookies++;   
+  }
+  else{
+    iterations++;
+    if(iterations<15){
+      setTimeout(function(){eeSetLastNameFromJS(iterations);},1000);
+    }
+  }
+} 
+
+function eeSetEmailFromJS(iterations){
+  if((typeof utag_data !== 'undefined') && (typeof utag_data.customer_email !== 'undefined') && ee_innerDoc.querySelectorAll("#launch-form-email").item(0)){
+    ee_innerDoc.querySelectorAll("#launch-form-email").item(0).value=utag_data.customer_email;
+    ee_NubmerOfCookies++;   
+  }
+  else{
+    iterations++;
+    if(iterations<15){
+      setTimeout(function(){eeSetEmailFromJS(iterations);},1000);
+    }
+  }
+}
+
+
+function eeSetValuesFromCookie(ID,cookie,iterations){
+  if((eegetCookie(cookie).length>0) &&  ee_innerDoc.querySelectorAll("#"+ID).item(0)){
+    ee_innerDoc.querySelectorAll("#"+ID).item(0).value=eegetCookie(cookie);
+    ee_NubmerOfCookies++;   
+    }
+
+  else{
+    iterations++;
+    if(iterations<15){
+      setTimeout(function(){eeSetValuesFromCookie(ID,cookie,iterations);},1000);
+    }
+  }
+}
+
+function eeSetValuesFromCookieLastName(ID,cookie,iterations){
+  if((eegetCookie(cookie).length>0) && ee_innerDoc.querySelectorAll("#launch-form-last-name").item(0)){
+        fullName = eegetCookie(cookie);
+        var res = fullName.split(" ");
+        if(res[res.length-1]){
+          ee_innerDoc.querySelectorAll("#launch-form-last-name").item(0).value=res[res.length-1];
+          ee_NubmerOfCookies++;
+        }
+  }
+  else{
+    iterations++;
+    if(iterations<15){
+      setTimeout(function(){eeSetValuesFromCookieLastName(ID,cookie,iterations);},1000);
+    }
+  }
+}
+
+
+function eeHideTitle(iterations){
+  if(ee_innerDoc.getElementsByClassName('oit-inlay-header-title-text').length){
+    for (i=0; i<ee_innerDoc.getElementsByClassName('oit-inlay-header-title-text').length; i++){
+      ee_innerDoc.getElementsByClassName('oit-inlay-header-title-text')[i].innerHTML ="";
+      ee_innerDoc.getElementsByClassName('oit-inlay-header-title-text')[i].style.display ="none";
+      ee_innerDoc.getElementsByClassName('oit-inlay-header-title-text')[i].style.visibility = "hidden";
+    }
+    ee_innerDoc.getElementsByClassName('oit-inlay-header')[0].style.backgroundColor = "unset";
+  }
+  else{
+    iterations++;
+    if(iterations<15){
+      setTimeout(function(){eeHideTitle(iterations);},1000);
+    }
+  }
+}
+
+
+function checkInlay(){
+
+  if(document.getElementById('inlay-oracle-chat-embedded')){
+    ee_iframe = document.getElementById('inlay-oracle-chat-embedded'); 
+    if(typeof  ee_iframe.contentDocument !== 'undefined'){
+      ee_innerDoc = ee_iframe.contentDocument;
+    }
+    if(typeof  ee_iframe.contentWindow !== 'undefined'){
+      ee_innerDoc = ee_iframe.contentWindow.document;
+    }
+    ee_NubmerOfCookies = 0;
+    //hide title and set values from page
+    eeHideTitle(0);
+    eeSetValuesFromCookie("launch-form-email","usb2cstorefrontRememberMeUID",0);
+    eeSetValuesFromCookie("launch-form-first-name","userFirstName",0);
+    eeSetValuesFromCookieLastName("launch-form-last-name","fullName",0);
+    eeSetFirstNameFromJS(0);
+    eeSetLastNameFromJS(0);
+    eeSetEmailFromJS(0);
+  }
+  else{
+    setTimeout(function()
+    {
+      checkInlay();
+    }, 1000);
+  }
+}
+
+
+//Main
+if(!document.getElementById("chatinlay")){
+  var div = document.createElement('div');
+  div.id = 'chatinlay';
+  document.body.appendChild(div);
+}
+
+ee_jsLoaded = true;

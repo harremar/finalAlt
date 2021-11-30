@@ -1,0 +1,82 @@
+window.optimizely.push({type:"load",data:{changes:[{"dependencies": [], "type": "custom_code", "id": "B0C0DE7A-1FCD-4944-8332-C372D5892411", "value": function($){(function () {
+  var searchCharLimit = 30; // configure to set search string limit
+  var utils = optimizely.get('utils');
+
+  function waitUntil(arr, callback, isDomElement) {
+    /* Minimum 2 arguments required */
+    if (arguments.length < 2 || !Array.isArray(arr) || typeof callback !== 'function') {
+      throw new Error('waitUntil function require minimum 2 parameters. First should be an Array, second should be a function');
+    }
+
+    var func = null;
+
+    function checkDomElement(selector) {
+      if (document.querySelectorAll(selector).length === 0) {
+        return false;
+      }
+      return true;
+    }
+
+    function checkGlobalVariable(variable) {
+      if (typeof window[variable] === 'undefined') {
+        return false;
+      }
+      return true;
+    }
+
+    /* assuming that the items are not DOM elements but Global variables like JQuery etc */
+    func = isDomElement ? checkDomElement : checkGlobalVariable;
+
+    for (var i = 0; i < arr.length; i++) {
+      if (!func(arr[i])) {
+        if (document.readyState === 'complete') {
+          console.log('waitUntil: Searched DOM elements/global variables do not exist');
+          return;
+        }
+        setTimeout(waitUntil.bind(this, arr, callback, isDomElement), 0);
+        return;
+      }
+    }
+    callback();
+  }
+
+  function debounce(func, wait, immediate) {
+    var timeout;
+    return function () {
+      var context = this,
+        args = arguments;
+      var later = function () {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+      var callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    };
+  }
+
+  function limitSearchChar() {
+    var searchInputEl = document.querySelectorAll('#active_search, #searchInput, #headerSearchInput');
+
+    for (var i = 0; i < searchInputEl.length; i++) {
+      searchInputEl[i].setAttribute('maxlength', searchCharLimit);
+    }
+  }
+
+  waitUntil(
+    ['#active_search, #searchInput, #headerSearchInput'],
+    function () {
+      limitSearchChar();
+
+      var resizeHandler = debounce(function () {
+        limitSearchChar();
+      }, 200);
+
+      window.addEventListener('resize', resizeHandler);
+      // utils.waitForElement('#active_search').then(function (elem) {});
+    },
+    true
+  );
+})();
+}}]}});

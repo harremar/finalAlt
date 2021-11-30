@@ -1,0 +1,46 @@
+window.optimizely.push({type:"load",data:{changes:[{"dependencies": [], "type": "custom_code", "id": "C9659452-AB0A-4134-900F-12B1551F0014", "value": function($){( function (){
+  
+  function debounce(func, wait, immediate) {
+	var timeout;
+	return function() {
+		var context = this, args = arguments;
+		var later = function() {
+			timeout = null;
+			if (!immediate) func.apply(context, args);
+		};
+		var callNow = immediate && !timeout;
+		clearTimeout(timeout);
+		timeout = setTimeout(later, wait);
+		if (callNow) func.apply(context, args);
+	};
+};
+  
+    
+  function handleReactMobileHeader(){
+  	var utils = window["optimizely"].get('utils');
+    utils.waitForElement('.mobile-menu-screen.giftGuide').then(function(element) {
+      if( jQuery('.oz-custom-brewer-link-react').length < 1 ){
+      jQuery(jQuery(jQuery(element).parent().children()[1]).find('.mobile-submenu-screen')[0]).append('<a href="/content/custom-coffee-makers/customize-a-design"><div class="oz-custom-brewer-link-react">Customize</div></a>');}
+    });
+  }
+  
+  function handleNonreactMobileHeader(){
+    var utils = window["optimizely"].get('utils');
+    utils.waitForElement('header .hot-brewers.top-header .level-one-container').then(function(element) {
+     // jQuery(element).append('<div class="oz-custom-coffee-link"><a href="https://www.google.com">Custom Coffee Makers</a></div>');
+    });
+  }
+  
+  var resizeHandler = debounce( function (){
+  	if( window.innerWidth < 992 ){
+    	handleReactMobileHeader();
+    }
+  },200);
+  
+  window.addEventListener( 'resize', resizeHandler);
+  if( window.innerWidth < 992 ){
+    	handleReactMobileHeader();
+  }
+  handleNonreactMobileHeader();
+})();
+}}, {"dependencies": [], "type": "append", "id": "AF8A80A0-4D4B-4B8B-9E3D-FBAAE40584D8", "value": "<style>@media(min-width:992px){\n\nheader .hot-brewers.top-header .level-one-container{\nwidth:70%;\n}\n\nheader .hot-brewers.top-header .level-one-container > div{\npadding-right:45px !important;\n}\n\n.oz-custom-brewer-link-react,.oz-custom-brewer-link{\nposition:relative;\nmargin-top:0px;\n      height: 380px;\n  display: inline-block;\n  max-width: 250px;\n  \n}\n  .oz-custom-brewer-link{\n    left:15px;\n  }\n  \n .oz-custom-brewer-link-react img, .oz-custom-brewer-link img {\n  \twidth: 250px;\n    height: 177px;\n  }\n  \n  /* .oz-custom-brewer-link img{\n  \twidth: 100%;\n    height: auto;\n  }\n  .oz-custom-brewer-link{ max-width: 290px}*/\n  \n  .oz-custom-brewer-link-react span, #wrapper #page .oz-custom-brewer-link span{\n  \tposition: ABSOLUTE;\n    padding: 5px;\n    left: 0px;\n    color:#ffffff !important;\n  }\n  \n  .oz-custom-brewer-link-react span:after, .oz-custom-brewer-link span:after\n  {\n  \tborder-style: solid;\n    border-color: #ffffff;\n    border-image: initial;\n    border-width: 0px 1px 1px 0px;\n    display: inline-block;\n    padding: 4px;\n    content: \" \";\n    transform: rotate( -45deg);\n    margin-left: 7px;\n    position: absolute;\n    top: 10px;\n  }\n  .oz-custom-brewer-link span:after { top: 14px;}\n  .HotBrewersBarComponent > div { margin-right: 30px; }\n}\n\n.oz-custom-brewer-link span{\n  \tfont-family: MarkOT-Medium,Helvetica,Arial,sans-serif;\n  }\n\n.oz-custom-brewer-link-react span, .oz-custom-brewer-link span{\n  \tcolor:#000000;\n  }\n\n@media(max-width:991px){\n  .oz-custom-brewer-link-react{\n  \t    padding: 9px 15px;\n    border-bottom: 1px solid #b2b2b2;\n  }\n  \n  .oz-custom-brewer-link-react img, .oz-custom-brewer-link img{\n  \tdisplay:none !important;\n  }\n  \n  .oz-custom-brewer-link\n  {\n  \tline-height: 45px;\n    border-bottom: 1px solid #b2b2b2;\n    padding-left: 15px;\n    font-size: 12px;\n    text-transform: uppercase;\n    /* font-family: 'MarkOT-Medium'; */\n    margin-bottom: 15px;\n  }\n}\n\n@media screen and (min-width: 1200px){\n  .hot-brewers div.main-links {\n      min-height: unset;\n  }\n  .hot-brewers.fly-out .accessories.section, .hot-brewers.fly-out .other-systems { /*min-height: 270px;*/}\n}\n@media (min-width: 992px) and (max-width: 1199px) {\n  header .hot-brewers.top-header .level-one-container > div{\n  \tpadding-right: 16px!important;\n  }\n  \n .HotBrewersBarComponent > div {\n   margin-right: 14px!important;\n  }\n  .oz-custom-brewer-link-react {\n    left: 0px;\n  }\n  .oz-custom-brewer-link-react,.oz-custom-brewer-link{ max-width: 230px}\n  .oz-custom-brewer-link{\n    left:10px;\n  }\n  \n    [data-at-id=\"HotBrewersBarComponent\"] .menuWrapper > div{ padding: 12px; }\n  .oz-custom-brewer-link-react{ max-width: 215px}\n  .oz-custom-brewer-link-react span{ left: 5px}\n}\n@media (min-width: 992px) and (max-width: 1040px) {\n  .HotBrewersBarComponent > div{\n  \t margin-right: 16px;\n   } \n  header .hot-brewers.top-header .level-one-container > div{\n   padding-right: 16px!important;\n  }\n  .oz-custom-brewer-link-react {\n    left: 0;\n  }\n  .white-header .top-nav-items .hot-brewers { padding: 20px 14px!important;}\n  \n}\n@media (max-width: 768px){\n  .oz-custom-brewer-link-react, #wrapper #page .oz-custom-brewer-link{ color: #000;}\n}</style>", "selector": "head"}, {"value": "<a href=\"/content/custom-coffee-makers/customize-a-design\"><div class=\"oz-custom-brewer-link-react\"><img src=\"https://images.keurig.com/is/image/keurig/oz_CustomBrewer2?fmt=png-alpha&qlt=90,1\"/><span>Customize</span></div></a>", "selector": ".header-content .HotBrewersBarComponent", "dependencies": [], "operator": "append", "type": "append", "id": "61FD7F93-6FC9-41B8-ABB9-75DD8BAC110C"}, {"value": "<a href=\"/content/custom-coffee-makers/customize-a-design\"><div class=\"oz-custom-brewer-link\"><img src=\"https://images.keurig.com/is/image/keurig/oz_CustomBrewer2?fmt=png-alpha&qlt=90,1\"/><span>Customize</span></div></a>", "selector": "header .hot-brewers .level-one-container", "dependencies": [], "operator": "append", "type": "append", "id": "DF8339C4-BB39-447C-85EA-DFA19A24F2FC"}]}});

@@ -1,0 +1,13 @@
+
+document.getElementById('__next').addEventListener('click', (event) => {
+    const el = event.target;
+    const elSibling = el.nextElementSibling;
+
+    if (!el.classList.contains('custom-modal-trigger')) return;
+    if (!elSibling) return;
+
+    const customEvent = new CustomEvent('cmsModalTrigger:click', {
+        detail: el.nextElementSibling.innerHTML
+    });
+    document.dispatchEvent(customEvent);
+});
