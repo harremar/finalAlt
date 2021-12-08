@@ -16,6 +16,8 @@ header {
     align-items: center;
     justify-content: space-between;
     padding: 50px;
+    transition: 0.3s;
+
     .hamburger {
       display: none;
       position: block;
@@ -157,7 +159,6 @@ header {
             background-size: cover;
             position: relative;
             .circleCount {
-              display: none;
               width: 24px;
               height: 24px;
               border-radius: 20px;
@@ -165,16 +166,14 @@ header {
               position: absolute;
               right: -10px;
               top: -4px;
-              display: flex;
+              display: none;
               align-items: center;
               justify-content: space-evenly;
-
-              p {
-                margin-top: 13px;
-                font-size: 14px;
-                font-family: OpenSansSB;
-                color: white;
-              }
+              // margin-top: 13px;
+              // padding-left: 8px;
+              font-size: 14px;
+              font-family: OpenSansSB;
+              color: white;
             }
           }
         }
@@ -194,6 +193,8 @@ header {
     justify-content: space-evenly;
     text-align: center;
     padding-bottom: 20px;
+    transition: 0.3s;
+
     input {
       display: none;
     }
@@ -383,7 +384,7 @@ header {
         padding: 10px;
         border-radius: 5px;
         border: none;
-        width: 100%;
+        width: 98%;
         height: 40px;
         margin: 5px;
         font-size: 14px;

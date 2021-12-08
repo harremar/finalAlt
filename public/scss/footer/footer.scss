@@ -10,8 +10,9 @@ footer {
     align-items: center;
     justify-content: space-between;
     background-color: #3b2b2f;
+    transition: 0.3s;
     .findstore-holder {
-      width: 100%;
+      width: 400px;
       height: 30px;
       padding-left: 15px;
       display: flex;
@@ -292,7 +293,7 @@ footer {
 
           input {
             height: 38px;
-            width: 220px;
+            width: 194px;
             border: #ccc solid 2px;
             padding-left: 20px;
             font-size: 12px;

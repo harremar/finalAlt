@@ -23,12 +23,14 @@
         font-family: OpenSansL;
         color: white;
         margin: 0;
+        transition: 0.3s;
       }
       h4 {
         font-size: 16px;
         font-family: OpenSansSB;
         color: white;
         margin: 0;
+        transition: 0.3s;
       }
     }
   }
@@ -38,6 +40,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    transition: 0.3s;
 
     .sortbutton-holder {
       width: 80%;
@@ -167,7 +170,7 @@
       }
     }
   }
-  .product-section {
+  #product-section {
     margin: 10px auto 30px auto;
     max-width: 100%;
     min-height: 1250px;
@@ -175,6 +178,8 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;
+    transition: 0.3s;
+
     .product-holder {
       margin: 15px 15px;
       position: relative;
@@ -182,6 +187,8 @@
       min-height: 600px;
       box-shadow: 0 8px 8px rgba($color: #000000, $alpha: 0.16);
       transition: transform 0.2s;
+      transition: 0.3s;
+
       .ribbon-holder {
         width: 100%;
         height: 25px;
@@ -310,7 +317,7 @@
         display: none;
       }
     }
-    .product-section {
+    #product-section {
       width: 1000px;
       min-height: 800px;
       margin: 0 auto;
