@@ -6,7 +6,7 @@ https://finalprojectlogin-3aa1f.web.app/
 For my final project in NEWM-N315 I was assigned to create a coffee maker website inspired by this website: 
 https://www.keurig.com/c/coffeemakers101?cm_sp=bo+cybermonday21-_-promo+hero+banner-_-shop+coffee+makers
 
-My task was to create a home page with minumin of 10 coffee makers, a login page with firebase authentication, and a cart page that would display all the items that were choosen on the home page and add p the total. I had to use the MVC model to injection new things into the app allowing me to have an one-page navigation. I also had to make sure my site is full response and would be friendly to use on any device.
+My task was to create a home page with minumin of 10 coffee makers, a login page with firebase authentication, and a cart page that would display all the items that were choosen on the home page and add up the total. I had to use the MVC model to injection new things into the app allowing me to have an one-page navigation. I also had to make sure my site is full response and would be friendly to use on any device.
 
 To get to the login page click the person icon located of the right corner of the screen to take you to the login/signup page. There you would be able to create an account that would be remember in firebase and would be able to log in. When you are logged in you should get an alert telling you that you are login in and the person icon would turn into an log out button which the user could click to log out of the site.
 
