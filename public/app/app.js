@@ -265,6 +265,7 @@ $(document).ready(function () {
     let app = firebase.app();
     initFirebase();
     initListener();
+    appendCartData(data);
   } catch {}
 });
 
@@ -415,5 +416,3 @@ function loadListeners(id) {
 
   onloadCartNumbers();
 }
-
-//pavlo.karasyuk@gmail.com
