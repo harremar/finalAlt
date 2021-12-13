@@ -3,36 +3,15 @@
 this is my project
 https://finalprojectlogin-3aa1f.web.app/
 
-this is what the site is suppose to look like
+For my final project in NEWM-N315 I was assigned to create a coffee maker website inspired by this website: 
 https://www.keurig.com/c/coffeemakers101?cm_sp=bo+cybermonday21-_-promo+hero+banner-_-shop+coffee+makers
 
-I am trying to get the data.json to display on the home page to get the 10 different coffee makers.
+My task was to create a home page with minumin of 10 coffee makers, a login page with firebase authentication, and a cart page that would display all the items that were choosen on the home page and add up the total. I had to use the MVC model to injection new things into the app allowing me to have an one-page navigation. I also had to make sure my site is full response and would be friendly to use on any device.
 
-TASK
-For this final, you will be using Firebase's authentication and adding it to your project. Your final project will be an e-commerce site. You must have a shopping cart, log in and create an account page and show at least 10 coffee machines.  
+To get to the login page click the person icon located of the right corner of the screen to take you to the login/signup page. There you would be able to create an account that would be remember in firebase and would be able to log in. When you are logged in you should get an alert telling you that you are login in and the person icon would turn into an log out button which the user could click to log out of the site.
 
-Your site needs to resemble this site, https://www.keurig.com/c/coffeemakers101?cm_sp=bo+cybermonday21-_-promo+hero+banner-_-shop+coffee+makers (Links to an external site.)
+When the user is login they are able to buy coffee makers which would be displayed on the cart page. You can get to the cart page by clicking the cart icon in the right hand corner. It also keeps track of how many coffee makers you have and get the total at the end. When on the cart page you have an option to delete all or purchase your cart. When you do this you should get two different alerts and the cart would be emptyed out and turned back to zero.
 
-Nothing else needs to work on the page, but you must have everything on there. ex. navigation, banner, footer etc..
+If the user is not login they won't be able to buy a coffee maker. The site would alert the user that they must be signed in inorder to buy one.
 
-Your project must have a create account and log-in section. There should be an icon in the top right corner of the page to show the user where to click to log in or create an account. When logged in it should give me the option to log out. 
-
-You must show a cart icon in the top right-hand corner that shows the count of how many coffee makers you have purchased. When clicked on your cart page must show all the coffee makers you have clicked the buy now button on. Your shopping cart page must have an empty cart button that will empty all products. 
-
-Each product must have at least:
-
-product image
-product name
-product price
-buy now button
-All of this must look like the site. I would load all the products in a JSON file and load them on the page. This will make adding things to the cart easier.
-
-Any other data can be stored in JSON that is held in memory, meaning it will not be saved if the page is refreshed. 
-
-Your site must be fully responsive and work on any screen size.
-
-Make sure you look at the font and use a similar font. 
-
-You must use the MVC model and view injection to allow for a one-page navigation. Also, use URL navigating. 
-
-Your README file should explain your site and why you made it and also have the URL. This will help when you show it later. 
+For each product they have an image, name, price, and buy now button. I got all of this information from my data.json and got it to loop in my app.js. I put this information into json to hold it in the computer's memory, so when you refresh everything should be saved onto the page.
